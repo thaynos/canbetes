@@ -1,15 +1,13 @@
-import streamlit as st
-
 # %%
+import streamlit as st
 def cancer_diagnosis_app():
    import pandas as pd
    import numpy as np
    import tensorflow as tf
    from sklearn.preprocessing import StandardScaler
 
-   # Load your CSV file
+   # Load the CSV file
    def load_data():
-       # Replace 'your_file.csv' with the actual file path
        df = pd.read_csv('cancer.csv')
        return df
 
@@ -17,9 +15,9 @@ def cancer_diagnosis_app():
 
    st.title("Cancer Diagnosis Prediction")
 
-   features = data.drop(columns=['diagnosis(1=m, 0=b)']) # Remove the target variable
+   features = data.drop(columns=['diagnosis(1=m, 0=b)']) # Removing the target variable
 
-   # Define minimum and maximum values for each column
+   # Defining minimum and maximum values for each column
    column_ranges = {
        'radius_mean': (6.981, 28.11),
        'texture_mean': (9.71, 39.28),
@@ -81,7 +79,7 @@ def cancer_diagnosis_app():
    # Load your trained model
    model = tf.keras.models.load_model('cancer_model.h5')
    scaler = StandardScaler()
-   scaler.fit(features) # Fit the scaler to your training data
+   scaler.fit(features) # Fitting the scaler to the training data
 
    # Remove the target variable from the input data
    input_data.pop('diagnosis(1=m, 0=b)', None)
@@ -124,9 +122,8 @@ def diabetes_prediction_app():
   from sklearn.metrics import accuracy_score
   import joblib
 
-  # Load your CSV file
+  # Load the CSV file
   def load_data():
-      # Replace 'your_file.csv' with the actual file path
       df = pd.read_csv('diabetes.csv')
       return df
 
@@ -136,7 +133,7 @@ def diabetes_prediction_app():
   X = diabetes_dataset.drop(columns='Outcome', axis=1)
   Y = diabetes_dataset['Outcome']
 
-  # Standardize the data
+  # Standardizing the data
   scaler = StandardScaler()
   scaler.fit(X)
   X = scaler.transform(X)
@@ -186,7 +183,7 @@ def diabetes_prediction_app():
   DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.078, max_value=2.42, value=st.session_state['DiabetesPedigreeFunction'], step=0.001)
   Age = st.number_input("Age", min_value=21, max_value=81, value=st.session_state['Age'], step=1)
 
-  # Update session state with new input values
+  # Updating session state with new input values
   st.session_state['Pregnancies'] = Pregnancies
   st.session_state['Glucose'] = Glucose
   st.session_state['BloodPressure'] = BloodPressure

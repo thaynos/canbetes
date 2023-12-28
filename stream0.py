@@ -6,9 +6,8 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 
 # %%
-# Load your CSV file
+# Loading the CSV file
 def load_data():
-    # Replace 'your_file.csv' with the actual file path
     df = pd.read_csv('cancer.csv')
     return df
 
@@ -16,11 +15,11 @@ data = load_data()
 
 st.title("Cancer Diagnosis Prediction")
 
-features = data.drop(columns=['diagnosis(1=m, 0=b)'])  # Remove the target variable
+features = data.drop(columns=['diagnosis(1=m, 0=b)'])  # Removing the target variable
 
 
 # %%
-# Define minimum and maximum values for each column
+# Defining minimum and maximum values for each column
 column_ranges = {
     'radius_mean': (6.981, 28.11),
     'texture_mean': (9.71, 39.28),
@@ -58,14 +57,14 @@ input_data = {}
 
 
 # %%
-# Initialize input fields in session state
+# Initializing input fields in session state
 if 'input_data' not in st.session_state:
  st.session_state['input_data'] = {}
  for feature_name, _ in column_ranges.items():
     st.session_state['input_data'][feature_name] = float(column_ranges[feature_name][0])
 
 # %%
-# Randomize button
+# Randomizing button
 if st.button("Randomize Values"):
  for feature_name, (min_range, max_range) in column_ranges.items():
      st.session_state['input_data'][feature_name] = np.random.uniform(float(min_range), float(max_range))
@@ -84,10 +83,10 @@ for feature_name, (min_range, max_range) in column_ranges.items():
  st.session_state['input_data'][feature_name] = feature_value
 
 # %%
-# Load your trained model
+# Loading the trained model
 model = tf.keras.models.load_model('cancer_model.h5')
 scaler = StandardScaler()
-scaler.fit(features)  # Fit the scaler to your training data
+scaler.fit(features)  # Fitting the scaler to the training data
 
 # %%
 # Remove the target variable from the input data

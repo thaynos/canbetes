@@ -8,13 +8,9 @@ from sklearn import svm
 from sklearn.metrics import accuracy_score
 import joblib
 
-# %% [markdown]
-# 
-
 # %%
-# Load your CSV file
+# Load the CSV file
 def load_data():
-    # Replace 'your_file.csv' with the actual file path
     df = pd.read_csv('diabetes.csv')
     return df
 
@@ -109,7 +105,7 @@ if st.button("Predict"):
 # %%
 # Reset values button
 if st.button("Reset Values"):
-    # Reset input field values to their initial values
+    # Resetting input field values to their initial values
     st.session_state['Pregnancies'] = 0
     st.session_state['Glucose'] = 0
     st.session_state['BloodPressure'] = 0
